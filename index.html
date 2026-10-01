@@ -1,0 +1,5786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SHOES | Little Miss Collection</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    color:#222;
+    overflow-x:hidden;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+input,
+textarea,
+select{
+    font-family:inherit;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    background:#111;
+    color:#fff;
+    padding:18px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.logo span{
+    display:block;
+    font-size:13px;
+    font-weight:normal;
+    letter-spacing:1px;
+    color:#ccc;
+}
+
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.header-btn{
+    background:#fff;
+    color:#111;
+    padding:10px 15px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.header-btn.dark{
+    background:#222;
+    color:#fff;
+    border:1px solid #444;
+}
+
+.cart-count,
+.wishlist-count{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:20px;
+    height:20px;
+    padding:0 5px;
+    background:#d33;
+    color:#fff;
+    border-radius:50px;
+    font-size:11px;
+    margin-left:4px;
+}
+
+
+/* =========================================================
+   STORE
+========================================================= */
+
+.container{
+    width:92%;
+    max-width:1250px;
+    margin:30px auto;
+}
+
+.store-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.store-title h1{
+    font-size:38px;
+    letter-spacing:3px;
+}
+
+.store-title p{
+    color:#777;
+    margin-top:6px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.controls{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+    background:#fff;
+}
+
+.sort{
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    background:#fff;
+}
+
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.products{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fill,minmax(250px,1fr));
+    gap:25px;
+}
+
+.product{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-3px);
+}
+
+.product-image{
+    width:100%;
+    height:300px;
+    background:#eee;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.product-image .wishlist-product{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:rgba(255,255,255,.95);
+    color:#111;
+    font-size:22px;
+    z-index:3;
+}
+
+.product-image .wishlist-product.active{
+    color:#d22;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info h3{
+    margin-bottom:8px;
+    font-size:19px;
+}
+
+.price{
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.stock{
+    font-size:13px;
+    color:#777;
+    margin-bottom:12px;
+}
+
+.click-image-note{
+    font-size:12px;
+    color:#888;
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   BUYING PAGE
+========================================================= */
+
+.buying-page{
+    display:none;
+}
+
+.buying-page.active{
+    display:block;
+}
+
+.store-page.hidden{
+    display:none;
+}
+
+.buying-container{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.back-store{
+    background:#111;
+    color:#fff;
+    padding:11px 18px;
+    border-radius:5px;
+    margin-bottom:20px;
+}
+
+.buying-card{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 3px 20px rgba(0,0,0,.08);
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+}
+
+.buying-gallery{
+    background:#111;
+    min-height:600px;
+    position:relative;
+}
+
+.buying-gallery-content{
+    width:100%;
+    height:600px;
+}
+
+.buying-gallery-content img,
+.buying-gallery-content video{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+.gallery-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,.9);
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    font-size:27px;
+    z-index:5;
+}
+
+.gallery-prev{
+    left:15px;
+}
+
+.gallery-next{
+    right:15px;
+}
+
+.gallery-dots{
+    position:absolute;
+    bottom:15px;
+    left:0;
+    right:0;
+    text-align:center;
+    z-index:5;
+}
+
+.gallery-dot{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    background:#777;
+    border-radius:50%;
+    margin:4px;
+    cursor:pointer;
+}
+
+.gallery-dot.active{
+    background:#fff;
+}
+
+.buying-details{
+    padding:35px;
+}
+
+.buying-details h1{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.buying-price{
+    font-size:27px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.buying-description{
+    color:#666;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.option-title{
+    font-weight:bold;
+    margin:18px 0 9px;
+}
+
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.option{
+    border:1px solid #ccc;
+    padding:10px 15px;
+    background:#fff;
+    border-radius:5px;
+    position:relative;
+}
+
+.option:hover{
+    border-color:#111;
+}
+
+.option.selected{
+    background:#111;
+    color:#fff;
+    border-color:#111;
+}
+
+.option.disabled{
+    opacity:.4;
+    cursor:not-allowed;
+    text-decoration:line-through;
+}
+
+.size-stock{
+    display:block;
+    font-size:10px;
+    margin-top:3px;
+    opacity:.7;
+}
+
+.selected-stock{
+    margin-top:12px;
+    font-size:13px;
+    color:#555;
+    min-height:18px;
+}
+
+.quantity-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+}
+
+.quantity-control{
+    display:flex;
+    align-items:center;
+    border:1px solid #ccc;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.quantity-control button{
+    width:38px;
+    height:38px;
+    background:#f3f3f3;
+    font-size:20px;
+}
+
+.quantity-control span{
+    width:45px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.buy-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:20px;
+}
+
+.buy-now-btn{
+    padding:15px;
+    background:#111;
+    color:#fff;
+    font-size:16px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.add-cart-btn{
+    padding:15px;
+    background:#fff;
+    color:#111;
+    border:1px solid #111;
+    font-size:16px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.wishlist-large{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    background:#f3f3f3;
+    color:#111;
+    border-radius:5px;
+}
+
+.wishlist-large.active{
+    background:#ffe5e5;
+    color:#d22;
+}
+
+.buy-now-btn:disabled,
+.add-cart-btn:disabled{
+    background:#aaa;
+    border-color:#aaa;
+    cursor:not-allowed;
+}
+
+.buy-note{
+    margin-top:14px;
+    font-size:12px;
+    color:#777;
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   CART / WISHLIST DRAWER
+========================================================= */
+
+.drawer-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:1500;
+}
+
+.drawer-overlay.active{
+    display:block;
+}
+
+.drawer{
+    position:absolute;
+    top:0;
+    right:0;
+    width:100%;
+    max-width:470px;
+    height:100%;
+    background:#fff;
+    overflow:auto;
+    padding:25px;
+}
+
+.drawer-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.drawer-header h2{
+    font-size:24px;
+}
+
+.drawer-close{
+    background:#111;
+    color:#fff;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    font-size:20px;
+}
+
+.drawer-item{
+    display:flex;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid #eee;
+}
+
+.drawer-item img{
+    width:75px;
+    height:75px;
+    object-fit:cover;
+    border-radius:5px;
+    background:#eee;
+}
+
+.drawer-item-info{
+    flex:1;
+}
+
+.drawer-item-info strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.drawer-item-meta{
+    font-size:12px;
+    color:#777;
+    line-height:1.5;
+}
+
+.drawer-item-price{
+    font-weight:bold;
+    margin-top:4px;
+}
+
+.drawer-item-actions{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    margin-top:8px;
+}
+
+.small-btn{
+    background:#eee;
+    padding:5px 9px;
+    border-radius:4px;
+}
+
+.remove-btn{
+    background:#ffe1e1;
+    color:#c00;
+    padding:5px 8px;
+    border-radius:4px;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    font-weight:bold;
+    padding:20px 0;
+}
+
+.drawer-buy{
+    width:100%;
+    padding:15px;
+    background:#111;
+    color:#fff;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.empty-drawer{
+    text-align:center;
+    color:#777;
+    padding:50px 10px;
+}
+
+
+/* =========================================================
+   ADMIN PANEL
+========================================================= */
+
+.admin-panel{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#f5f5f5;
+    z-index:2000;
+    overflow:auto;
+}
+
+.admin-panel.active{
+    display:block;
+}
+
+.admin-header{
+    background:#111;
+    color:#fff;
+    padding:18px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.admin-content{
+    width:92%;
+    max-width:1100px;
+    margin:30px auto;
+}
+
+.admin-card{
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    margin-bottom:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+
+.admin-card h2{
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+    padding:11px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    outline:none;
+    background:#fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color:#111;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.url-note{
+    background:#f2f2f2;
+    padding:14px;
+    margin-bottom:20px;
+    border-left:4px solid #111;
+    line-height:1.5;
+    font-size:14px;
+}
+
+.media-section{
+    grid-column:1/-1;
+    border-top:1px solid #ddd;
+    padding-top:20px;
+}
+
+.media-section h3{
+    margin-bottom:5px;
+}
+
+.media-section p{
+    color:#777;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.media-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.media-field{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.media-field label{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.media-field input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.inventory-section{
+    grid-column:1/-1;
+    border-top:1px solid #ddd;
+    padding-top:20px;
+}
+
+.inventory-section h3{
+    margin-bottom:5px;
+}
+
+.inventory-note{
+    background:#fff8e6;
+    border-left:4px solid #e5a000;
+    padding:12px;
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+.inventory-table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+.inventory-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+.inventory-table th,
+.inventory-table td{
+    border:1px solid #ddd;
+    padding:9px;
+    text-align:left;
+}
+
+.inventory-table th{
+    background:#f5f5f5;
+    font-size:13px;
+}
+
+.inventory-table input{
+    width:100%;
+    padding:9px;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+.remove-row{
+    background:#ffe0e0;
+    color:#b00;
+    padding:8px 10px;
+    border-radius:4px;
+}
+
+.add-row-btn{
+    background:#eee;
+    color:#111;
+    padding:10px 15px;
+    border-radius:5px;
+    margin-top:12px;
+}
+
+.save-btn{
+    background:#111;
+    color:#fff;
+    padding:13px 22px;
+    border-radius:5px;
+    margin-top:18px;
+}
+
+.cancel-btn{
+    background:#ddd;
+    color:#111;
+    padding:13px 22px;
+    border-radius:5px;
+    margin-top:18px;
+    margin-left:8px;
+}
+
+
+/* =========================================================
+   ADMIN PRODUCTS
+========================================================= */
+
+.admin-product{
+    border:1px solid #ddd;
+    padding:15px;
+    margin-bottom:12px;
+    border-radius:6px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.admin-product-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.admin-product img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:5px;
+    background:#eee;
+}
+
+.admin-actions{
+    display:flex;
+    gap:8px;
+}
+
+.edit-btn{
+    background:#eee;
+    padding:9px 13px;
+    border-radius:4px;
+}
+
+.delete-btn{
+    background:#d33;
+    color:#fff;
+    padding:9px 13px;
+    border-radius:4px;
+}
+
+.inventory-summary{
+    font-size:12px;
+    color:#777;
+    margin-top:5px;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-box{
+    width:90%;
+    max-width:400px;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    margin:auto;
+}
+
+.login-box h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.login-submit{
+    width:100%;
+    padding:13px;
+    background:#111;
+    color:#fff;
+    border-radius:5px;
+}
+
+.login-error{
+    color:#d00;
+    text-align:center;
+    margin-top:10px;
+    display:none;
+}
+
+.empty{
+    text-align:center;
+    padding:60px 20px;
+    color:#777;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%) translateY(100px);
+    background:#111;
+    color:#fff;
+    padding:13px 20px;
+    border-radius:5px;
+    z-index:5000;
+    opacity:0;
+    transition:.3s;
+    font-size:14px;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    header{
+        padding:13px 10px;
+    }
+
+    .logo{
+        font-size:19px;
+        letter-spacing:1.5px;
+    }
+
+    .logo span{
+        font-size:9px;
+    }
+
+    .header-actions{
+        gap:4px;
+    }
+
+    .header-btn{
+        padding:8px 8px;
+        font-size:11px;
+    }
+
+    .container{
+        width:100%;
+        margin:0;
+        padding:0 7px 20px;
+    }
+
+    .store-title{
+        padding:18px 0 14px;
+        margin:0;
+    }
+
+    .store-title h1{
+        font-size:27px;
+    }
+
+    .store-title p{
+        font-size:12px;
+    }
+
+    .controls{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:7px;
+        margin-bottom:13px;
+    }
+
+    .search,
+    .sort{
+        width:100%;
+        min-width:0;
+        padding:10px;
+        font-size:14px;
+    }
+
+    .products{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+        gap:8px;
+    }
+
+    .product{
+        border-radius:6px;
+    }
+
+    .product-image{
+        height:auto;
+        aspect-ratio:1/1;
+    }
+
+    .product-info{
+        padding:8px;
+    }
+
+    .product-info h3{
+        font-size:13px;
+        line-height:1.3;
+        margin-bottom:4px;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
+    .price{
+        font-size:15px;
+        margin-bottom:3px;
+    }
+
+    .stock{
+        font-size:10px;
+        margin-bottom:4px;
+    }
+
+    .click-image-note{
+        display:none;
+    }
+
+    .product-image .wishlist-product{
+        width:32px;
+        height:32px;
+        top:6px;
+        right:6px;
+        font-size:18px;
+    }
+
+
+    /* BUYING PAGE */
+
+    .buying-container{
+        width:100%;
+        margin:0;
+    }
+
+    .back-store{
+        margin:10px;
+    }
+
+    .buying-card{
+        display:block;
+        border-radius:0;
+    }
+
+    .buying-gallery{
+        min-height:0;
+        height:55vh;
+    }
+
+    .buying-gallery-content{
+        height:55vh;
+        min-height:300px;
+    }
+
+    .buying-details{
+        padding:20px 15px 30px;
+    }
+
+    .buying-details h1{
+        font-size:24px;
+    }
+
+    .buying-price{
+        font-size:23px;
+    }
+
+    .buy-actions{
+        grid-template-columns:1fr;
+    }
+
+    .drawer{
+        max-width:100%;
+        padding:18px;
+    }
+
+
+    /* ADMIN */
+
+    .admin-header{
+        padding:14px 12px;
+    }
+
+    .admin-header strong{
+        font-size:14px;
+    }
+
+    .admin-content{
+        width:100%;
+        margin:0;
+        padding:12px;
+    }
+
+    .admin-card{
+        padding:16px;
+        border-radius:7px;
+        margin-bottom:12px;
+    }
+
+    .admin-card h2{
+        font-size:20px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .media-section,
+    .inventory-section{
+        grid-column:auto;
+    }
+
+    .media-grid{
+        grid-template-columns:1fr;
+    }
+
+    .save-btn,
+    .cancel-btn{
+        width:100%;
+        margin-left:0;
+        margin-top:10px;
+    }
+
+    .admin-product{
+        flex-direction:column;
+        align-items:stretch;
+        padding:10px;
+    }
+
+    .admin-product-info{
+        width:100%;
+    }
+
+    .admin-product img{
+        width:60px;
+        height:60px;
+    }
+
+    .admin-actions{
+        width:100%;
+    }
+
+    .admin-actions button{
+        flex:1;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+    <div class="logo">
+
+        SHOES
+
+        <span>
+            Little Miss Collection
+        </span>
+
+    </div>
+
+
+    <div class="header-actions">
+
+        <button
+            class="header-btn"
+            onclick="openWishlist()">
+
+            ♡
+            <span id="wishlistCount"
+                  class="wishlist-count">
+                0
+            </span>
+
+        </button>
+
+
+        <button
+            class="header-btn"
+            onclick="openCart()">
+
+            🛒
+            <span id="cartCount"
+                  class="cart-count">
+                0
+            </span>
+
+        </button>
+
+
+        <button
+            class="header-btn dark"
+            onclick="openAdmin()">
+
+            Admin
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     STORE PAGE
+========================================================= -->
+
+<main
+    id="storePage"
+    class="container store-page">
+
+
+    <div class="store-title">
+
+        <h1>
+            SHOES
+        </h1>
+
+        <p>
+            Little Miss Collection
+        </p>
+
+    </div>
+
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="search"
+            class="search"
+            placeholder="Search shoes..."
+            oninput="displayProducts()"
+        >
+
+
+        <select
+            id="sort"
+            class="sort"
+            onchange="displayProducts()">
+
+            <option value="newest">
+                Newest
+            </option>
+
+            <option value="low">
+                Price: Low to High
+            </option>
+
+            <option value="high">
+                Price: High to Low
+            </option>
+
+            <option value="name">
+                Name
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        id="products"
+        class="products">
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     BUYING PAGE
+========================================================= -->
+
+<section
+    id="buyingPage"
+    class="buying-page">
+
+
+    <div class="buying-container">
+
+        <button
+            class="back-store"
+            onclick="closeBuyingPage()">
+
+            ← Back to Shoes
+
+        </button>
+
+
+        <div class="buying-card">
+
+
+            <!-- GALLERY -->
+
+            <div class="buying-gallery">
+
+                <div
+                    id="buyingGalleryContent"
+                    class="buying-gallery-content">
+                </div>
+
+
+                <button
+                    class="gallery-nav gallery-prev"
+                    onclick="changeBuyingSlide(-1)">
+
+                    ‹
+
+                </button>
+
+
+                <button
+                    class="gallery-nav gallery-next"
+                    onclick="changeBuyingSlide(1)">
+
+                    ›
+
+                </button>
+
+
+                <div
+                    id="buyingGalleryDots"
+                    class="gallery-dots">
+                </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="buying-details">
+
+                <h1 id="buyingName">
+                </h1>
+
+
+                <div
+                    id="buyingPrice"
+                    class="buying-price">
+                </div>
+
+
+                <div
+                    id="buyingDescription"
+                    class="buying-description">
+                </div>
+
+
+                <!-- COLOR -->
+
+                <div class="option-title">
+                    Color
+                </div>
+
+                <div
+                    id="buyingColors"
+                    class="options">
+                </div>
+
+
+                <!-- SIZE -->
+
+                <div class="option-title">
+                    EUR Size
+                </div>
+
+                <div
+                    id="buyingSizes"
+                    class="options">
+                </div>
+
+
+                <div
+                    id="selectedStock"
+                    class="selected-stock">
+                </div>
+
+
+                <!-- QUANTITY -->
+
+                <div class="quantity-row">
+
+                    <strong>
+                        Quantity
+                    </strong>
+
+
+                    <div class="quantity-control">
+
+                        <button
+                            onclick="changeQuantity(-1)">
+                            −
+                        </button>
+
+                        <span
+                            id="quantityValue">
+                            1
+                        </span>
+
+                        <button
+                            onclick="changeQuantity(1)">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUY / CART -->
+
+                <div class="buy-actions">
+
+                    <button
+                        id="buyNowButton"
+                        class="buy-now-btn"
+                        onclick="buyNow()">
+
+                        BUY NOW
+
+                    </button>
+
+
+                    <button
+                        id="addCartButton"
+                        class="add-cart-btn"
+                        onclick="addToCart()">
+
+                        ADD TO CART
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    id="largeWishlistButton"
+                    class="wishlist-large"
+                    onclick="toggleCurrentWishlist()">
+
+                    ♡ ADD TO WISHLIST
+
+                </button>
+
+
+                <div class="buy-note">
+
+                    Clicking BUY NOW will open your
+                    Razorpay payment page.
+
+                    <br><br>
+
+                    Payment:
+                    Razorpay
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CART DRAWER
+========================================================= -->
+
+<div
+    id="cartOverlay"
+    class="drawer-overlay"
+    onclick="closeDrawerOutside(event)">
+
+
+    <div class="drawer">
+
+        <div class="drawer-header">
+
+            <h2>
+                Your Cart
+            </h2>
+
+            <button
+                class="drawer-close"
+                onclick="closeCart()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="cartItems">
+        </div>
+
+
+        <div
+            id="cartFooter">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     WISHLIST DRAWER
+========================================================= -->
+
+<div
+    id="wishlistOverlay"
+    class="drawer-overlay"
+    onclick="closeDrawerOutside(event)">
+
+
+    <div class="drawer">
+
+        <div class="drawer-header">
+
+            <h2>
+                Wishlist
+            </h2>
+
+            <button
+                class="drawer-close"
+                onclick="closeWishlist()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="wishlistItems">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ADMIN PANEL
+========================================================= -->
+
+<div
+    class="admin-panel"
+    id="adminPanel">
+
+
+    <div class="admin-header">
+
+        <strong>
+            SHOES ADMIN PANEL
+        </strong>
+
+
+        <button
+            class="header-btn"
+            onclick="closeAdmin()">
+
+            Close
+
+        </button>
+
+    </div>
+
+
+    <div class="admin-content">
+
+
+        <!-- LOGIN -->
+
+        <div
+            class="admin-card"
+            id="loginSection">
+
+            <div class="login-box">
+
+                <h2>
+                    Admin Login
+                </h2>
+
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Username"
+                >
+
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                >
+
+
+                <button
+                    class="login-submit"
+                    onclick="login()">
+
+                    Login
+
+                </button>
+
+
+                <div
+                    class="login-error"
+                    id="loginError">
+
+                    Invalid username or password.
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD -->
+
+        <div
+            id="dashboard"
+            style="display:none;">
+
+
+            <!-- ADD / EDIT -->
+
+            <div class="admin-card">
+
+                <h2 id="formTitle">
+                    Add New Product
+                </h2>
+
+
+                <div class="url-note">
+
+                    <strong>
+                        Product Media
+                    </strong>
+
+                    <br><br>
+
+                    Add up to
+                    <strong>10 image URLs</strong>
+                    and
+                    <strong>2 video URLs</strong>
+                    for one product.
+
+                    <br><br>
+
+                    Paste the direct media URLs
+                    from Wix or your media hosting service.
+
+                </div>
+
+
+                <input
+                    type="hidden"
+                    id="editId"
+                >
+
+
+                <div class="form-grid">
+
+
+                    <!-- PRODUCT NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            placeholder="Ladies Shoes"
+                        >
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Price (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            placeholder="2499"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <!-- COLORS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Colors
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productColors"
+                            placeholder="Red, Black, White"
+                        >
+
+                    </div>
+
+
+                    <!-- SIZES -->
+
+                    <div class="form-group">
+
+                        <label>
+                            EUR Sizes
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productSizes"
+                            placeholder="35, 36, 37, 38, 39, 40"
+                        >
+
+                    </div>
+
+
+                    <!-- MEDIA -->
+
+                    <div class="media-section">
+
+                        <h3>
+                            Product Images
+                        </h3>
+
+                        <p>
+                            You can add up to 10 images.
+                            Leave unused fields empty.
+                        </p>
+
+
+                        <div class="media-grid">
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 1
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image1"
+                                    placeholder="Image URL 1"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 2
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image2"
+                                    placeholder="Image URL 2"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 3
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image3"
+                                    placeholder="Image URL 3"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 4
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image4"
+                                    placeholder="Image URL 4"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 5
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image5"
+                                    placeholder="Image URL 5"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 6
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image6"
+                                    placeholder="Image URL 6"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 7
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image7"
+                                    placeholder="Image URL 7"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 8
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image8"
+                                    placeholder="Image URL 8"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 9
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image9"
+                                    placeholder="Image URL 9"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Image 10
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="image10"
+                                    placeholder="Image URL 10"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VIDEOS -->
+
+                    <div class="media-section">
+
+                        <h3>
+                            Product Videos
+                        </h3>
+
+                        <p>
+                            You can add up to 2 video URLs.
+                        </p>
+
+
+                        <div class="media-grid">
+
+                            <div class="media-field">
+
+                                <label>
+                                    Video 1
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="video1"
+                                    placeholder="Video URL 1"
+                                >
+
+                            </div>
+
+
+                            <div class="media-field">
+
+                                <label>
+                                    Video 2
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="video2"
+                                    placeholder="Video URL 2"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INVENTORY -->
+
+                    <div class="inventory-section">
+
+                        <h3>
+                            Size + Color Stock
+                        </h3>
+
+
+                        <div class="inventory-note">
+
+                            Enter stock for each exact
+                            <strong>Color + EUR Size</strong>
+                            combination.
+
+                            <br><br>
+
+                            Example:
+
+                            <br>
+
+                            Red | 35 | 5
+
+                            <br>
+
+                            Black | 36 | 3
+
+                            <br>
+
+                            Red | 36 | 1
+
+                            <br>
+
+                            Black | 35 | 1
+
+                            <br><br>
+
+                            Customers will only be able
+                            to select combinations that
+                            have stock.
+
+                        </div>
+
+
+                        <div class="inventory-table-wrap">
+
+                            <table class="inventory-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Color
+                                        </th>
+
+                                        <th>
+                                            EUR Size
+                                        </th>
+
+                                        <th>
+                                            Stock
+                                        </th>
+
+                                        <th>
+                                            Remove
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody
+                                    id="inventoryRows">
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="add-row-btn"
+                            onclick="addInventoryRow()">
+
+                            + Add Size / Color Stock
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea
+                            id="productDescription"
+                            placeholder="Write product description...">
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="save-btn"
+                    onclick="saveProduct()">
+
+                    Save Product
+
+                </button>
+
+
+                <button
+                    class="cancel-btn"
+                    onclick="clearForm()">
+
+                    Clear
+
+                </button>
+
+            </div>
+
+
+            <!-- ADMIN PRODUCTS -->
+
+            <div class="admin-card">
+
+                <h2>
+                    Products
+                </h2>
+
+
+                <div
+                    id="adminProducts">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATABASE
+========================================================= */
+
+const STORAGE_KEY =
+    "littleMissCollectionShoes";
+
+const CART_KEY =
+    "littleMissCollectionCart";
+
+const WISHLIST_KEY =
+    "littleMissCollectionWishlist";
+
+
+let products =
+    JSON.parse(
+        localStorage.getItem(STORAGE_KEY) || "[]"
+    );
+
+
+let cart =
+    JSON.parse(
+        localStorage.getItem(CART_KEY) || "[]"
+    );
+
+
+let wishlist =
+    JSON.parse(
+        localStorage.getItem(WISHLIST_KEY) || "[]"
+    );
+
+
+let currentProduct = null;
+
+let currentBuyingSlide = 0;
+
+let selectedColor = "";
+
+let selectedSize = "";
+
+let selectedQuantity = 1;
+
+
+/*
+    YOUR RAZORPAY PAYMENT LINK
+*/
+
+const RAZORPAY_URL =
+    "https://razorpay.me/@littlemisscollections";
+
+
+/* =========================================================
+   START
+========================================================= */
+
+migrateOldProducts();
+
+displayProducts();
+
+updateHeaderCounts();
+
+handleURL();
+
+
+/* =========================================================
+   MIGRATE OLD PRODUCTS
+========================================================= */
+
+function migrateOldProducts(){
+
+    let changed = false;
+
+
+    products = products.map(product => {
+
+        /*
+            Old products had:
+
+            stock
+            sizes
+            colors
+
+            New products use:
+
+            inventory:[
+                {
+                    color:"Red",
+                    size:"35",
+                    stock:5
+                }
+            ]
+        */
+
+
+        if(
+            !Array.isArray(product.inventory)
+        ){
+
+            const oldColors =
+                Array.isArray(product.colors)
+                ? product.colors
+                : [];
+
+
+            const oldSizes =
+                Array.isArray(product.sizes)
+                ? product.sizes
+                : [];
+
+
+            const oldStock =
+                Number(product.stock || 0);
+
+
+            product.inventory = [];
+
+
+            /*
+                If the old product had colors
+                and sizes, create combinations.
+            */
+
+            if(
+                oldColors.length > 0 &&
+                oldSizes.length > 0
+            ){
+
+                oldColors.forEach(color => {
+
+                    oldSizes.forEach(size => {
+
+                        product.inventory.push({
+
+                            color:String(color),
+
+                            size:String(size),
+
+                            stock:oldStock
+
+                        });
+
+                    });
+
+                });
+
+            }
+
+
+            changed = true;
+
+        }
+
+
+        return product;
+
+    });
+
+
+    if(changed){
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(products)
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DISPLAY PRODUCTS
+========================================================= */
+
+function displayProducts(){
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const sort =
+        document
+        .getElementById("sort")
+        .value;
+
+
+    let list =
+        products.filter(product =>
+
+            product.name
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+
+    if(sort === "low"){
+
+        list.sort(
+            (a,b) =>
+            Number(a.price) -
+            Number(b.price)
+        );
+
+    }
+
+
+    if(sort === "high"){
+
+        list.sort(
+            (a,b) =>
+            Number(b.price) -
+            Number(a.price)
+        );
+
+    }
+
+
+    if(sort === "name"){
+
+        list.sort(
+            (a,b) =>
+            a.name.localeCompare(b.name)
+        );
+
+    }
+
+
+    if(sort === "newest"){
+
+        list.sort(
+            (a,b) =>
+            Number(b.created || 0) -
+            Number(a.created || 0)
+        );
+
+    }
+
+
+    const container =
+        document.getElementById("products");
+
+
+    if(list.length === 0){
+
+        container.innerHTML = `
+
+            <div
+                class="empty"
+                style="grid-column:1/-1;">
+
+                <h2>
+                    No products found
+                </h2>
+
+                <p>
+                    Add products from the Admin Panel.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+
+        list.map(product => {
+
+            const firstImage =
+                getFirstImage(product);
+
+
+            const totalStock =
+                getTotalStock(product);
+
+
+            const wished =
+                wishlist.includes(product.id);
+
+
+            return `
+
+                <div class="product">
+
+                    <div
+                        class="product-image"
+                        onclick="openBuyingPage('${product.id}')">
+
+                        ${
+                            firstImage
+
+                            ?
+
+                            `
+                            <img
+                                src="${escapeHtml(firstImage.url)}"
+                                alt="${escapeHtml(product.name)}"
+                                onerror="
+                                this.style.display='none';
+                                "
+                            >
+                            `
+
+                            :
+
+                            `
+                            <div
+                                style="
+                                height:100%;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                color:#777;
+                                font-size:12px;">
+
+                                No Image
+
+                            </div>
+                            `
+                        }
+
+
+                        <button
+                            class="wishlist-product
+                            ${wished ? "active" : ""}"
+                            onclick="event.stopPropagation(); toggleWishlist('${product.id}')">
+
+                            ${wished ? "♥" : "♡"}
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>
+                            ${escapeHtml(product.name)}
+                        </h3>
+
+
+                        <div class="price">
+
+                            ₹${Number(product.price)
+                            .toLocaleString("en-IN")}
+
+                        </div>
+
+
+                        <div class="stock">
+
+                            ${
+                                totalStock > 0
+
+                                ?
+
+                                "In Stock: " +
+                                totalStock
+
+                                :
+
+                                "Out of Stock"
+                            }
+
+                        </div>
+
+
+                        <div class="click-image-note">
+
+                            Tap image to buy
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   GET FIRST IMAGE
+========================================================= */
+
+function getFirstImage(product){
+
+    return (product.media || [])
+        .find(
+            item =>
+            item.type === "image"
+        );
+
+}
+
+
+/* =========================================================
+   GET TOTAL STOCK
+========================================================= */
+
+function getTotalStock(product){
+
+    if(
+        Array.isArray(product.inventory)
+    ){
+
+        return product.inventory.reduce(
+            (total,item) =>
+            total + Number(item.stock || 0),
+            0
+        );
+
+    }
+
+
+    return Number(
+        product.stock || 0
+    );
+
+}
+
+
+/* =========================================================
+   OPEN BUYING PAGE
+========================================================= */
+
+function openBuyingPage(id){
+
+    const product =
+        products.find(
+            item =>
+            item.id === id
+        );
+
+
+    if(!product)
+        return;
+
+
+    currentProduct = product;
+
+    currentBuyingSlide = 0;
+
+    selectedColor = "";
+
+    selectedSize = "";
+
+    selectedQuantity = 1;
+
+
+    document
+        .getElementById("storePage")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("buyingPage")
+        .classList.add("active");
+
+
+    document
+        .getElementById("buyingName")
+        .textContent =
+        product.name;
+
+
+    document
+        .getElementById("buyingPrice")
+        .textContent =
+        "₹" +
+        Number(product.price)
+        .toLocaleString("en-IN");
+
+
+    document
+        .getElementById("buyingDescription")
+        .textContent =
+        product.description || "";
+
+
+    document
+        .getElementById("quantityValue")
+        .textContent =
+        "1";
+
+
+    createBuyingGallery();
+
+    createBuyingOptions();
+
+    updateWishlistButton();
+
+    updateSelectedStock();
+
+
+    /*
+        Put product ID into URL.
+
+        Example:
+
+        #product=123456
+    */
+
+    history.pushState(
+        {},
+        "",
+        "#product=" +
+        encodeURIComponent(id)
+    );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"instant"
+    });
+
+}
+
+
+/* =========================================================
+   CLOSE BUYING PAGE
+========================================================= */
+
+function closeBuyingPage(){
+
+    currentProduct = null;
+
+
+    document
+        .getElementById("buyingPage")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("storePage")
+        .classList.remove("hidden");
+
+
+    history.pushState(
+        {},
+        "",
+        window.location.pathname +
+        window.location.search
+    );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"instant"
+    });
+
+}
+
+
+/* =========================================================
+   URL HANDLING
+========================================================= */
+
+function handleURL(){
+
+    const hash =
+        window.location.hash;
+
+
+    if(
+        hash.startsWith("#product=")
+    ){
+
+        const id =
+            decodeURIComponent(
+                hash.substring(
+                    "#product=".length
+                )
+            );
+
+
+        const product =
+            products.find(
+                item =>
+                item.id === id
+            );
+
+
+        if(product){
+
+            openBuyingPage(id);
+
+        }
+
+    }
+
+}
+
+
+window.addEventListener(
+    "popstate",
+    handleURL
+);
+
+
+/* =========================================================
+   BUYING GALLERY
+========================================================= */
+
+function createBuyingGallery(){
+
+    const media =
+        currentProduct.media || [];
+
+
+    const content =
+        document.getElementById(
+            "buyingGalleryContent"
+        );
+
+
+    const dots =
+        document.getElementById(
+            "buyingGalleryDots"
+        );
+
+
+    if(media.length === 0){
+
+        content.innerHTML = `
+
+            <div
+                style="
+                height:100%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                color:#fff;">
+
+                No media available
+
+            </div>
+
+        `;
+
+        dots.innerHTML = "";
+
+        return;
+
+    }
+
+
+    if(
+        currentBuyingSlide >=
+        media.length
+    ){
+
+        currentBuyingSlide = 0;
+
+    }
+
+
+    const item =
+        media[currentBuyingSlide];
+
+
+    if(item.type === "video"){
+
+        content.innerHTML = `
+
+            <video
+                src="${escapeHtml(item.url)}"
+                controls
+                autoplay
+                muted
+                playsinline>
+            </video>
+
+        `;
+
+    }else{
+
+        content.innerHTML = `
+
+            <img
+                src="${escapeHtml(item.url)}"
+                alt="${escapeHtml(currentProduct.name)}"
+            >
+
+        `;
+
+    }
+
+
+    dots.innerHTML =
+
+        media.map(
+            (item,index) => `
+
+                <span
+                    class="gallery-dot
+                    ${
+                        index === currentBuyingSlide
+                        ? "active"
+                        : ""
+                    }"
+                    onclick="goBuyingSlide(${index})">
+                </span>
+
+            `
+        ).join("");
+
+}
+
+
+function changeBuyingSlide(direction){
+
+    if(
+        !currentProduct ||
+        !currentProduct.media ||
+        currentProduct.media.length === 0
+    )
+        return;
+
+
+    currentBuyingSlide += direction;
+
+
+    if(currentBuyingSlide < 0){
+
+        currentBuyingSlide =
+            currentProduct.media.length - 1;
+
+    }
+
+
+    if(
+        currentBuyingSlide >=
+        currentProduct.media.length
+    ){
+
+        currentBuyingSlide = 0;
+
+    }
+
+
+    createBuyingGallery();
+
+}
+
+
+function goBuyingSlide(index){
+
+    currentBuyingSlide = index;
+
+    createBuyingGallery();
+
+}
+
+
+/* =========================================================
+   BUYING OPTIONS
+========================================================= */
+
+function getInventory(){
+
+    if(
+        currentProduct &&
+        Array.isArray(currentProduct.inventory)
+    ){
+
+        return currentProduct.inventory;
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =========================================================
+   CREATE COLOR OPTIONS
+========================================================= */
+
+function createBuyingOptions(){
+
+    const colorBox =
+        document.getElementById(
+            "buyingColors"
+        );
+
+
+    const sizeBox =
+        document.getElementById(
+            "buyingSizes"
+        );
+
+
+    const inventory =
+        getInventory();
+
+
+    const colors = [
+        ...new Set(
+            inventory
+            .map(item => String(item.color))
+            .filter(Boolean)
+        )
+    ];
+
+
+    const sizes = [
+        ...new Set(
+            inventory
+            .map(item => String(item.size))
+            .filter(Boolean)
+        )
+    ];
+
+
+    /*
+        If old product has colors,
+        use them as fallback.
+    */
+
+    if(
+        colors.length === 0 &&
+        Array.isArray(currentProduct.colors)
+    ){
+
+        currentProduct.colors.forEach(
+            color => {
+
+                if(
+                    !colors.includes(
+                        String(color)
+                    )
+                ){
+
+                    colors.push(
+                        String(color)
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /*
+        If old product has sizes,
+        use them as fallback.
+    */
+
+    if(
+        sizes.length === 0 &&
+        Array.isArray(currentProduct.sizes)
+    ){
+
+        currentProduct.sizes.forEach(
+            size => {
+
+                if(
+                    !sizes.includes(
+                        String(size)
+                    )
+                ){
+
+                    sizes.push(
+                        String(size)
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if(colors.length === 0){
+
+        colorBox.innerHTML =
+            "<span style='color:#777;'>No colors available</span>";
+
+    }else{
+
+        colorBox.innerHTML =
+
+            colors.map(
+                color => `
+
+                    <button
+                        class="option
+                        ${
+                            selectedColor === color
+                            ? "selected"
+                            : ""
+                        }"
+                        onclick="selectBuyingColor('${escapeAttribute(color)}')">
+
+                        ${escapeHtml(color)}
+
+                    </button>
+
+                `
+            ).join("");
+
+    }
+
+
+    if(sizes.length === 0){
+
+        sizeBox.innerHTML =
+            "<span style='color:#777;'>No sizes available</span>";
+
+    }else{
+
+        sizeBox.innerHTML =
+
+            sizes.map(
+                size => {
+
+                    const stock =
+                        getStockForCombination(
+                            selectedColor,
+                            size
+                        );
+
+
+                    const disabled =
+                        stock <= 0;
+
+
+                    return `
+
+                        <button
+                            class="option
+                            ${
+                                selectedSize === size
+                                ? "selected"
+                                : ""
+                            }
+                            ${
+                                disabled
+                                ? "disabled"
+                                : ""
+                            }"
+                            ${
+                                disabled
+                                ? "disabled"
+                                : ""
+                            }
+                            onclick="selectBuyingSize('${escapeAttribute(size)}')">
+
+                            ${escapeHtml(size)}
+
+                            <span
+                                class="size-stock">
+
+                                ${
+                                    stock > 0
+                                    ? stock + " left"
+                                    : "Out"
+                                }
+
+                            </span>
+
+                        </button>
+
+                    `;
+
+                }
+            ).join("");
+
+    }
+
+}
+
+
+/* =========================================================
+   SELECT COLOR
+========================================================= */
+
+function selectBuyingColor(color){
+
+    selectedColor = color;
+
+    selectedSize = "";
+
+    selectedQuantity = 1;
+
+
+    document
+        .getElementById("quantityValue")
+        .textContent = "1";
+
+
+    createBuyingOptions();
+
+    updateSelectedStock();
+
+}
+
+
+/* =========================================================
+   SELECT SIZE
+========================================================= */
+
+function selectBuyingSize(size){
+
+    const stock =
+        getStockForCombination(
+            selectedColor,
+            size
+        );
+
+
+    if(stock <= 0){
+
+        showToast(
+            "This size is out of stock."
+        );
+
+        return;
+
+    }
+
+
+    selectedSize = size;
+
+    selectedQuantity = 1;
+
+
+    document
+        .getElementById("quantityValue")
+        .textContent = "1";
+
+
+    createBuyingOptions();
+
+    updateSelectedStock();
+
+}
+
+
+/* =========================================================
+   GET STOCK FOR COLOR + SIZE
+========================================================= */
+
+function getStockForCombination(
+    color,
+    size
+){
+
+    if(
+        !currentProduct ||
+        !color ||
+        !size
+    ){
+
+        return 0;
+
+    }
+
+
+    const inventory =
+        getInventory();
+
+
+    const item =
+        inventory.find(
+            row =>
+
+            String(row.color)
+            .toLowerCase()
+            ===
+            String(color)
+            .toLowerCase()
+
+            &&
+
+            String(row.size)
+            .toLowerCase()
+            ===
+            String(size)
+            .toLowerCase()
+        );
+
+
+    return item
+        ? Number(item.stock || 0)
+        : 0;
+
+}
+
+
+/* =========================================================
+   UPDATE STOCK DISPLAY
+========================================================= */
+
+function updateSelectedStock(){
+
+    const box =
+        document.getElementById(
+            "selectedStock"
+        );
+
+
+    const buyButton =
+        document.getElementById(
+            "buyNowButton"
+        );
+
+
+    const cartButton =
+        document.getElementById(
+            "addCartButton"
+        );
+
+
+    if(
+        !selectedColor ||
+        !selectedSize
+    ){
+
+        box.textContent =
+            "Please select a color and size.";
+
+
+        buyButton.disabled = true;
+
+        cartButton.disabled = true;
+
+        return;
+
+    }
+
+
+    const stock =
+        getStockForCombination(
+            selectedColor,
+            selectedSize
+        );
+
+
+    if(stock <= 0){
+
+        box.textContent =
+            "This combination is out of stock.";
+
+        buyButton.disabled = true;
+
+        cartButton.disabled = true;
+
+        return;
+
+    }
+
+
+    box.textContent =
+        stock +
+        (
+            stock === 1
+            ? " pair available"
+            : " pairs available"
+        );
+
+
+    if(selectedQuantity > stock){
+
+        selectedQuantity = stock;
+
+        document
+            .getElementById("quantityValue")
+            .textContent =
+            String(stock);
+
+    }
+
+
+    buyButton.disabled = false;
+
+    cartButton.disabled = false;
+
+}
+
+
+/* =========================================================
+   QUANTITY
+========================================================= */
+
+function changeQuantity(change){
+
+    if(
+        !currentProduct ||
+        !selectedColor ||
+        !selectedSize
+    ){
+
+        showToast(
+            "Please select color and size first."
+        );
+
+        return;
+
+    }
+
+
+    const stock =
+        getStockForCombination(
+            selectedColor,
+            selectedSize
+        );
+
+
+    let next =
+        selectedQuantity + change;
+
+
+    if(next < 1)
+        next = 1;
+
+
+    if(next > stock){
+
+        next = stock;
+
+        showToast(
+            "Only " +
+            stock +
+            " available."
+        );
+
+    }
+
+
+    selectedQuantity = next;
+
+
+    document
+        .getElementById("quantityValue")
+        .textContent =
+        String(selectedQuantity);
+
+}
+
+
+/* =========================================================
+   BUY NOW
+========================================================= */
+
+function buyNow(){
+
+    if(!currentProduct)
+        return;
+
+
+    if(
+        !selectedColor ||
+        !selectedSize
+    ){
+
+        showToast(
+            "Please select color and size."
+        );
+
+        return;
+
+    }
+
+
+    const stock =
+        getStockForCombination(
+            selectedColor,
+            selectedSize
+        );
+
+
+    if(stock < selectedQuantity){
+
+        showToast(
+            "Not enough stock available."
+        );
+
+        return;
+
+    }
+
+
+    /*
+        Razorpay payment link.
+
+        Because this is a generic Razorpay.me
+        payment page, the product details are
+        also shown to the customer in the
+        confirmation message before opening
+        Razorpay.
+    */
+
+    const confirmed =
+        confirm(
+
+            "Product: " +
+            currentProduct.name +
+
+            "\nColor: " +
+            selectedColor +
+
+            "\nEUR Size: " +
+            selectedSize +
+
+            "\nQuantity: " +
+            selectedQuantity +
+
+            "\n\nContinue to Razorpay?"
+
+        );
+
+
+    if(!confirmed)
+        return;
+
+
+    window.open(
+        RAZORPAY_URL,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+function addToCart(){
+
+    if(!currentProduct)
+        return;
+
+
+    if(
+        !selectedColor ||
+        !selectedSize
+    ){
+
+        showToast(
+            "Please select color and size."
+        );
+
+        return;
+
+    }
+
+
+    const stock =
+        getStockForCombination(
+            selectedColor,
+            selectedSize
+        );
+
+
+    if(stock < selectedQuantity){
+
+        showToast(
+            "Not enough stock available."
+        );
+
+        return;
+
+    }
+
+
+    const existing =
+        cart.find(
+            item =>
+
+            item.productId ===
+            currentProduct.id
+
+            &&
+
+            item.color ===
+            selectedColor
+
+            &&
+
+            item.size ===
+            selectedSize
+        );
+
+
+    if(existing){
+
+        const newQuantity =
+            existing.quantity +
+            selectedQuantity;
+
+
+        if(newQuantity > stock){
+
+            existing.quantity = stock;
+
+        }else{
+
+            existing.quantity =
+                newQuantity;
+
+        }
+
+    }else{
+
+        cart.push({
+
+            id:
+                Date.now().toString() +
+                Math.random()
+                .toString(36)
+                .substring(2),
+
+            productId:
+                currentProduct.id,
+
+            color:
+                selectedColor,
+
+            size:
+                selectedSize,
+
+            quantity:
+                selectedQuantity
+
+        });
+
+    }
+
+
+    saveCart();
+
+    updateHeaderCounts();
+
+    showToast(
+        "Added to cart."
+    );
+
+}
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart(){
+
+    localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* =========================================================
+   OPEN CART
+========================================================= */
+
+function openCart(){
+
+    renderCart();
+
+    document
+        .getElementById("cartOverlay")
+        .classList.add("active");
+
+}
+
+
+/* =========================================================
+   CLOSE CART
+========================================================= */
+
+function closeCart(){
+
+    document
+        .getElementById("cartOverlay")
+        .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+function renderCart(){
+
+    const box =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    const footer =
+        document.getElementById(
+            "cartFooter"
+        );
+
+
+    if(cart.length === 0){
+
+        box.innerHTML = `
+
+            <div class="empty-drawer">
+
+                <h3>
+                    Your cart is empty
+                </h3>
+
+                <p>
+                    Add some beautiful shoes.
+                </p>
+
+            </div>
+
+        `;
+
+        footer.innerHTML = "";
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+
+    box.innerHTML =
+
+        cart.map(item => {
+
+            const product =
+                products.find(
+                    p =>
+                    p.id ===
+                    item.productId
+                );
+
+
+            if(!product)
+                return "";
+
+
+            const image =
+                getFirstImage(product);
+
+
+            const itemTotal =
+                Number(product.price) *
+                Number(item.quantity);
+
+
+            total += itemTotal;
+
+
+            return `
+
+                <div class="drawer-item">
+
+                    ${
+                        image
+
+                        ?
+
+                        `
+                        <img
+                            src="${escapeHtml(image.url)}"
+                            alt=""
+                        >
+                        `
+
+                        :
+
+                        `
+                        <div
+                            style="
+                            width:75px;
+                            height:75px;
+                            background:#eee;">
+                        </div>
+                        `
+                    }
+
+
+                    <div class="drawer-item-info">
+
+                        <strong>
+                            ${escapeHtml(product.name)}
+                        </strong>
+
+
+                        <div class="drawer-item-meta">
+
+                            Color:
+                            ${escapeHtml(item.color)}
+
+                            <br>
+
+                            EUR Size:
+                            ${escapeHtml(item.size)}
+
+                        </div>
+
+
+                        <div class="drawer-item-price">
+
+                            ₹${itemTotal
+                            .toLocaleString("en-IN")}
+
+                        </div>
+
+
+                        <div class="drawer-item-actions">
+
+                            <button
+                                class="small-btn"
+                                onclick="changeCartQuantity('${item.id}',-1)">
+
+                                −
+
+                            </button>
+
+
+                            <strong>
+                                ${item.quantity}
+                            </strong>
+
+
+                            <button
+                                class="small-btn"
+                                onclick="changeCartQuantity('${item.id}',1)">
+
+                                +
+
+                            </button>
+
+
+                            <button
+                                class="remove-btn"
+                                onclick="removeFromCart('${item.id}')">
+
+                                Remove
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    footer.innerHTML = `
+
+        <div class="cart-total">
+
+            <span>
+                Total
+            </span>
+
+            <span>
+                ₹${total.toLocaleString("en-IN")}
+            </span>
+
+        </div>
+
+
+        <button
+            class="drawer-buy"
+            onclick="checkoutCart()">
+
+            BUY CART WITH RAZORPAY
+
+        </button>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CART QUANTITY
+========================================================= */
+
+function changeCartQuantity(
+    cartId,
+    change
+){
+
+    const item =
+        cart.find(
+            row =>
+            row.id === cartId
+        );
+
+
+    if(!item)
+        return;
+
+
+    const product =
+        products.find(
+            p =>
+            p.id === item.productId
+        );
+
+
+    if(!product)
+        return;
+
+
+    const stock =
+        getStockForCombination(
+            item.color,
+            item.size,
+            product
+        );
+
+
+    let next =
+        item.quantity + change;
+
+
+    if(next < 1){
+
+        removeFromCart(cartId);
+
+        return;
+
+    }
+
+
+    if(next > stock){
+
+        showToast(
+            "Only " +
+            stock +
+            " available."
+        );
+
+        return;
+
+    }
+
+
+    item.quantity = next;
+
+
+    saveCart();
+
+    renderCart();
+
+    updateHeaderCounts();
+
+}
+
+
+/* =========================================================
+   REMOVE CART ITEM
+========================================================= */
+
+function removeFromCart(cartId){
+
+    cart =
+        cart.filter(
+            item =>
+            item.id !== cartId
+        );
+
+
+    saveCart();
+
+    renderCart();
+
+    updateHeaderCounts();
+
+}
+
+
+/* =========================================================
+   CART CHECKOUT
+========================================================= */
+
+function checkoutCart(){
+
+    if(cart.length === 0){
+
+        showToast(
+            "Your cart is empty."
+        );
+
+        return;
+
+    }
+
+
+    let message =
+        "You have " +
+        cart.length +
+        " item type(s) in your cart.\n\n" +
+
+        "Continue to Razorpay?";
+
+
+    if(
+        !confirm(message)
+    ){
+
+        return;
+
+    }
+
+
+    window.open(
+        RAZORPAY_URL,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   WISHLIST
+========================================================= */
+
+function toggleWishlist(id){
+
+    const index =
+        wishlist.indexOf(id);
+
+
+    if(index === -1){
+
+        wishlist.push(id);
+
+        showToast(
+            "Added to wishlist."
+        );
+
+    }else{
+
+        wishlist.splice(
+            index,
+            1
+        );
+
+        showToast(
+            "Removed from wishlist."
+        );
+
+    }
+
+
+    saveWishlist();
+
+    updateHeaderCounts();
+
+    displayProducts();
+
+
+    if(
+        currentProduct &&
+        currentProduct.id === id
+    ){
+
+        updateWishlistButton();
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE WISHLIST
+========================================================= */
+
+function saveWishlist(){
+
+    localStorage.setItem(
+        WISHLIST_KEY,
+        JSON.stringify(wishlist)
+    );
+
+}
+
+
+/* =========================================================
+   CURRENT WISHLIST
+========================================================= */
+
+function toggleCurrentWishlist(){
+
+    if(!currentProduct)
+        return;
+
+
+    toggleWishlist(
+        currentProduct.id
+    );
+
+}
+
+
+/* =========================================================
+   WISHLIST BUTTON
+========================================================= */
+
+function updateWishlistButton(){
+
+    const button =
+        document.getElementById(
+            "largeWishlistButton"
+        );
+
+
+    if(!currentProduct)
+        return;
+
+
+    const active =
+        wishlist.includes(
+            currentProduct.id
+        );
+
+
+    if(active){
+
+        button.classList.add(
+            "active"
+        );
+
+        button.textContent =
+            "♥ REMOVE FROM WISHLIST";
+
+    }else{
+
+        button.classList.remove(
+            "active"
+        );
+
+        button.textContent =
+            "♡ ADD TO WISHLIST";
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN WISHLIST
+========================================================= */
+
+function openWishlist(){
+
+    renderWishlist();
+
+    document
+        .getElementById(
+            "wishlistOverlay"
+        )
+        .classList.add("active");
+
+}
+
+
+/* =========================================================
+   CLOSE WISHLIST
+========================================================= */
+
+function closeWishlist(){
+
+    document
+        .getElementById(
+            "wishlistOverlay"
+        )
+        .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   RENDER WISHLIST
+========================================================= */
+
+function renderWishlist(){
+
+    const box =
+        document.getElementById(
+            "wishlistItems"
+        );
+
+
+    const items =
+        products.filter(
+            product =>
+            wishlist.includes(
+                product.id
+            )
+        );
+
+
+    if(items.length === 0){
+
+        box.innerHTML = `
+
+            <div class="empty-drawer">
+
+                <h3>
+                    Wishlist is empty
+                </h3>
+
+                <p>
+                    Tap ♡ on a product to save it.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+
+        items.map(product => {
+
+            const image =
+                getFirstImage(product);
+
+
+            return `
+
+                <div class="drawer-item">
+
+                    ${
+                        image
+
+                        ?
+
+                        `
+                        <img
+                            src="${escapeHtml(image.url)}"
+                            alt=""
+                            onclick="closeWishlist();openBuyingPage('${product.id}')"
+                            style="cursor:pointer;">
+                        `
+
+                        :
+
+                        ""
+                    }
+
+
+                    <div class="drawer-item-info">
+
+                        <strong>
+                            ${escapeHtml(product.name)}
+                        </strong>
+
+
+                        <div class="drawer-item-price">
+
+                            ₹${Number(product.price)
+                            .toLocaleString("en-IN")}
+
+                        </div>
+
+
+                        <div
+                            style="
+                            display:flex;
+                            gap:6px;
+                            margin-top:8px;">
+
+                            <button
+                                class="small-btn"
+                                onclick="
+                                closeWishlist();
+                                openBuyingPage('${product.id}')
+                                ">
+
+                                Buy
+
+                            </button>
+
+
+                            <button
+                                class="remove-btn"
+                                onclick="
+                                toggleWishlist('${product.id}');
+                                renderWishlist();
+                                ">
+
+                                Remove
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   HEADER COUNTS
+========================================================= */
+
+function updateHeaderCounts(){
+
+    const cartCount =
+        cart.reduce(
+            (total,item) =>
+            total + Number(item.quantity || 0),
+            0
+        );
+
+
+    document
+        .getElementById(
+            "cartCount"
+        )
+        .textContent =
+        String(cartCount);
+
+
+    document
+        .getElementById(
+            "wishlistCount"
+        )
+        .textContent =
+        String(wishlist.length);
+
+}
+
+
+/* =========================================================
+   DRAWER OUTSIDE
+========================================================= */
+
+function closeDrawerOutside(event){
+
+    if(
+        event.target === event.currentTarget
+    ){
+
+        event.currentTarget
+            .classList.remove(
+                "active"
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+function openAdmin(){
+
+    document
+        .getElementById("adminPanel")
+        .classList.add("active");
+
+
+    document
+        .getElementById("loginSection")
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById("dashboard")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("username")
+        .value = "";
+
+
+    document
+        .getElementById("password")
+        .value = "";
+
+
+    document
+        .getElementById("loginError")
+        .style.display =
+        "none";
+
+}
+
+
+function closeAdmin(){
+
+    document
+        .getElementById("adminPanel")
+        .classList.remove(
+            "active"
+        );
+
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+function login(){
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    /*
+        CHANGE THESE.
+
+        IMPORTANT:
+        This is only a frontend demo login.
+        It is NOT secure for a real store.
+    */
+
+    const correctUsername =
+        "admin";
+
+
+    const correctPassword =
+        "admin123";
+
+
+    if(
+        username === correctUsername &&
+        password === correctPassword
+    ){
+
+        document
+            .getElementById(
+                "loginSection"
+            )
+            .style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "dashboard"
+            )
+            .style.display =
+            "block";
+
+
+        displayAdminProducts();
+
+
+        if(
+            document
+            .getElementById(
+                "inventoryRows"
+            )
+            .children.length === 0
+        ){
+
+            addInventoryRow();
+
+        }
+
+    }else{
+
+        document
+            .getElementById(
+                "loginError"
+            )
+            .style.display =
+            "block";
+
+    }
+
+}
+
+
+/* =========================================================
+   INVENTORY ROW
+========================================================= */
+
+function addInventoryRow(
+    color = "",
+    size = "",
+    stock = ""
+){
+
+    const tbody =
+        document.getElementById(
+            "inventoryRows"
+        );
+
+
+    const row =
+        document.createElement("tr");
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <input
+                type="text"
+                class="inventory-color"
+                placeholder="Red"
+                value="${escapeAttribute(color)}"
+            >
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="text"
+                class="inventory-size"
+                placeholder="35"
+                value="${escapeAttribute(size)}"
+            >
+
+        </td>
+
+
+        <td>
+
+            <input
+                type="number"
+                class="inventory-stock"
+                placeholder="5"
+                min="0"
+                value="${escapeAttribute(stock)}"
+            >
+
+        </td>
+
+
+        <td>
+
+            <button
+                type="button"
+                class="remove-row"
+                onclick="this.closest('tr').remove()">
+
+                Remove
+
+            </button>
+
+        </td>
+
+    `;
+
+
+    tbody.appendChild(row);
+
+}
+
+
+/* =========================================================
+   READ INVENTORY
+========================================================= */
+
+function readInventory(){
+
+    const rows =
+        document.querySelectorAll(
+            "#inventoryRows tr"
+        );
+
+
+    const inventory = [];
+
+
+    rows.forEach(row => {
+
+        const color =
+            row
+            .querySelector(
+                ".inventory-color"
+            )
+            .value
+            .trim();
+
+
+        const size =
+            row
+            .querySelector(
+                ".inventory-size"
+            )
+            .value
+            .trim();
+
+
+        const stock =
+            row
+            .querySelector(
+                ".inventory-stock"
+            )
+            .value
+            .trim();
+
+
+        if(
+            color &&
+            size &&
+            stock !== ""
+        ){
+
+            inventory.push({
+
+                color:color,
+
+                size:size,
+
+                stock:
+                    Math.max(
+                        0,
+                        Number(stock)
+                    )
+
+            });
+
+        }
+
+    });
+
+
+    return inventory;
+
+}
+
+
+/* =========================================================
+   SAVE PRODUCT
+========================================================= */
+
+function saveProduct(){
+
+    const name =
+        document
+        .getElementById("productName")
+        .value
+        .trim();
+
+
+    const price =
+        document
+        .getElementById("productPrice")
+        .value
+        .trim();
+
+
+    const colors =
+        document
+        .getElementById("productColors")
+        .value
+        .split(",")
+        .map(item => item.trim())
+        .filter(Boolean);
+
+
+    const sizes =
+        document
+        .getElementById("productSizes")
+        .value
+        .split(",")
+        .map(item => item.trim())
+        .filter(Boolean);
+
+
+    const description =
+        document
+        .getElementById(
+            "productDescription"
+        )
+        .value
+        .trim();
+
+
+    const inventory =
+        readInventory();
+
+
+    /* =====================================================
+       VALIDATION
+    ===================================================== */
+
+    if(!name){
+
+        alert(
+            "Please enter product name."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        price === "" ||
+        Number(price) < 0
+    ){
+
+        alert(
+            "Please enter a valid price."
+        );
+
+        return;
+
+    }
+
+
+    if(inventory.length === 0){
+
+        alert(
+            "Please add at least one color + size stock row."
+        );
+
+        return;
+
+    }
+
+
+    /*
+        Validate duplicate combinations.
+    */
+
+    const combinationSet =
+        new Set();
+
+
+    for(
+        const item of inventory
+    ){
+
+        const key =
+            item.color
+            .toLowerCase()
+            .trim()
+            +
+            "|"
+            +
+            item.size
+            .toLowerCase()
+            .trim();
+
+
+        if(
+            combinationSet.has(key)
+        ){
+
+            alert(
+                "Duplicate color + size combination found:\n\n" +
+                item.color +
+                " / " +
+                item.size
+            );
+
+            return;
+
+        }
+
+
+        combinationSet.add(key);
+
+    }
+
+
+    /* =====================================================
+       MEDIA
+    ===================================================== */
+
+    const media = [];
+
+
+    for(
+        let i = 1;
+        i <= 10;
+        i++
+    ){
+
+        const url =
+            document
+            .getElementById(
+                "image" + i
+            )
+            .value
+            .trim();
+
+
+        if(url){
+
+            media.push({
+
+                url:url,
+
+                type:"image"
+
+            });
+
+        }
+
+    }
+
+
+    for(
+        let i = 1;
+        i <= 2;
+        i++
+    ){
+
+        const url =
+            document
+            .getElementById(
+                "video" + i
+            )
+            .value
+            .trim();
+
+
+        if(url){
+
+            media.push({
+
+                url:url,
+
+                type:"video"
+
+            });
+
+        }
+
+    }
+
+
+    if(media.length === 0){
+
+        alert(
+            "Please add at least one image URL."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       OLD/COMPATIBILITY STOCK
+    ===================================================== */
+
+    const totalStock =
+        inventory.reduce(
+            (total,item) =>
+            total +
+            Number(item.stock || 0),
+            0
+        );
+
+
+    /* =====================================================
+       EDIT ID
+    ===================================================== */
+
+    const editId =
+        document
+        .getElementById("editId")
+        .value;
+
+
+    /* =====================================================
+       EDIT
+    ===================================================== */
+
+    if(editId){
+
+        const index =
+            products.findIndex(
+                product =>
+                product.id === editId
+            );
+
+
+        if(index === -1){
+
+            alert(
+                "Product not found."
+            );
+
+            return;
+
+        }
+
+
+        products[index] = {
+
+            ...products[index],
+
+            name:name,
+
+            price:Number(price),
+
+            stock:totalStock,
+
+            colors:colors,
+
+            sizes:sizes,
+
+            inventory:inventory,
+
+            media:media,
+
+            description:description
+
+        };
+
+
+        alert(
+            "Product updated successfully."
+        );
+
+    }else{
+
+
+        /* =================================================
+           NEW PRODUCT
+        ================================================= */
+
+        const newProduct = {
+
+            id:
+                Date.now().toString(),
+
+            name:name,
+
+            price:Number(price),
+
+            stock:totalStock,
+
+            colors:colors,
+
+            sizes:sizes,
+
+            inventory:inventory,
+
+            media:media,
+
+            description:description,
+
+            created:
+                Date.now()
+
+        };
+
+
+        products.push(
+            newProduct
+        );
+
+
+        alert(
+            "Product saved successfully."
+        );
+
+    }
+
+
+    /* =====================================================
+       SAVE
+    ===================================================== */
+
+    try{
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(products)
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Unable to save product."
+        );
+
+        return;
+
+    }
+
+
+    clearForm();
+
+    displayProducts();
+
+    displayAdminProducts();
+
+}
+
+
+/* =========================================================
+   ADMIN PRODUCT LIST
+========================================================= */
+
+function displayAdminProducts(){
+
+    const box =
+        document.getElementById(
+            "adminProducts"
+        );
+
+
+    if(products.length === 0){
+
+        box.innerHTML = `
+
+            <p>
+                No products added yet.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+
+        products.map(product => {
+
+            const image =
+                getFirstImage(product);
+
+
+            const totalStock =
+                getTotalStock(product);
+
+
+            const combinations =
+                Array.isArray(
+                    product.inventory
+                )
+                ? product.inventory.length
+                : 0;
+
+
+            return `
+
+                <div class="admin-product">
+
+                    <div class="admin-product-info">
+
+                        ${
+                            image
+
+                            ?
+
+                            `
+                            <img
+                                src="${escapeHtml(image.url)}"
+                                alt=""
+                            >
+                            `
+
+                            :
+
+                            ""
+                        }
+
+
+                        <div>
+
+                            <strong>
+                                ${escapeHtml(product.name)}
+                            </strong>
+
+                            <br>
+
+                            ₹${Number(product.price)
+                            .toLocaleString("en-IN")}
+
+                            <br>
+
+                            Total Stock:
+                            ${totalStock}
+
+                            <div class="inventory-summary">
+
+                                ${combinations}
+                                color/size combinations
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="admin-actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editProduct('${product.id}')">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteProduct('${product.id}')">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   EDIT PRODUCT
+========================================================= */
+
+function editProduct(id){
+
+    const product =
+        products.find(
+            item =>
+            item.id === id
+        );
+
+
+    if(!product)
+        return;
+
+
+    document
+        .getElementById("editId")
+        .value =
+        product.id;
+
+
+    document
+        .getElementById("productName")
+        .value =
+        product.name;
+
+
+    document
+        .getElementById("productPrice")
+        .value =
+        product.price;
+
+
+    document
+        .getElementById("productColors")
+        .value =
+        (
+            product.colors ||
+            []
+        ).join(", ");
+
+
+    document
+        .getElementById("productSizes")
+        .value =
+        (
+            product.sizes ||
+            []
+        ).join(", ");
+
+
+    document
+        .getElementById(
+            "productDescription"
+        )
+        .value =
+        product.description || "";
+
+
+    /* =====================================================
+       CLEAR MEDIA
+    ===================================================== */
+
+    for(
+        let i = 1;
+        i <= 10;
+        i++
+    ){
+
+        document
+            .getElementById(
+                "image" + i
+            )
+            .value = "";
+
+    }
+
+
+    for(
+        let i = 1;
+        i <= 2;
+        i++
+    ){
+
+        document
+            .getElementById(
+                "video" + i
+            )
+            .value = "";
+
+    }
+
+
+    /* =====================================================
+       LOAD MEDIA
+    ===================================================== */
+
+    let imageIndex = 1;
+
+    let videoIndex = 1;
+
+
+    (
+        product.media ||
+        []
+    ).forEach(item => {
+
+        if(
+            item.type === "image" &&
+            imageIndex <= 10
+        ){
+
+            document
+                .getElementById(
+                    "image" + imageIndex
+                )
+                .value =
+                item.url;
+
+
+            imageIndex++;
+
+        }
+
+
+        if(
+            item.type === "video" &&
+            videoIndex <= 2
+        ){
+
+            document
+                .getElementById(
+                    "video" + videoIndex
+                )
+                .value =
+                item.url;
+
+
+            videoIndex++;
+
+        }
+
+    });
+
+
+    /* =====================================================
+       LOAD INVENTORY
+    ===================================================== */
+
+    const tbody =
+        document.getElementById(
+            "inventoryRows"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    if(
+        Array.isArray(
+            product.inventory
+        ) &&
+        product.inventory.length > 0
+    ){
+
+        product.inventory.forEach(
+            item => {
+
+                addInventoryRow(
+                    item.color,
+                    item.size,
+                    item.stock
+                );
+
+            }
+        );
+
+    }else{
+
+        /*
+            Fallback for old products.
+        */
+
+        const colors =
+            product.colors || [];
+
+
+        const sizes =
+            product.sizes || [];
+
+
+        const stock =
+            product.stock || 0;
+
+
+        if(
+            colors.length &&
+            sizes.length
+        ){
+
+            colors.forEach(
+                color => {
+
+                    sizes.forEach(
+                        size => {
+
+                            addInventoryRow(
+                                color,
+                                size,
+                                stock
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }else{
+
+            addInventoryRow();
+
+        }
+
+    }
+
+
+    document
+        .getElementById(
+            "formTitle"
+        )
+        .textContent =
+        "Edit Product";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteProduct(id){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this product?"
+        );
+
+
+    if(!confirmed)
+        return;
+
+
+    products =
+        products.filter(
+            product =>
+            product.id !== id
+        );
+
+
+    /*
+        Also remove it from wishlist.
+    */
+
+    wishlist =
+        wishlist.filter(
+            productId =>
+            productId !== id
+        );
+
+
+    /*
+        Remove deleted product
+        from cart.
+    */
+
+    cart =
+        cart.filter(
+            item =>
+            item.productId !== id
+        );
+
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(products)
+    );
+
+
+    saveWishlist();
+
+    saveCart();
+
+    displayProducts();
+
+    displayAdminProducts();
+
+    updateHeaderCounts();
+
+}
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearForm(){
+
+    document
+        .getElementById("editId")
+        .value = "";
+
+
+    document
+        .getElementById("productName")
+        .value = "";
+
+
+    document
+        .getElementById("productPrice")
+        .value = "";
+
+
+    document
+        .getElementById("productColors")
+        .value = "";
+
+
+    document
+        .getElementById("productSizes")
+        .value = "";
+
+
+    document
+        .getElementById(
+            "productDescription"
+        )
+        .value = "";
+
+
+    for(
+        let i = 1;
+        i <= 10;
+        i++
+    ){
+
+        document
+            .getElementById(
+                "image" + i
+            )
+            .value = "";
+
+    }
+
+
+    for(
+        let i = 1;
+        i <= 2;
+        i++
+    ){
+
+        document
+            .getElementById(
+                "video" + i
+            )
+            .value = "";
+
+    }
+
+
+    document
+        .getElementById(
+            "inventoryRows"
+        )
+        .innerHTML = "";
+
+
+    addInventoryRow();
+
+
+    document
+        .getElementById(
+            "formTitle"
+        )
+        .textContent =
+        "Add New Product";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(text){
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttribute(text){
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+/* =========================================================
+   MOBILE BUYING PAGE SWIPE
+========================================================= */
+
+let buyingTouchStartX = 0;
+
+let buyingTouchStartY = 0;
+
+
+document
+    .getElementById(
+        "buyingGalleryContent"
+    )
+    .addEventListener(
+        "touchstart",
+        function(event){
+
+            buyingTouchStartX =
+                event
+                .changedTouches[0]
+                .screenX;
+
+
+            buyingTouchStartY =
+                event
+                .changedTouches[0]
+                .screenY;
+
+        },
+        {
+            passive:true
+        }
+    );
+
+
+document
+    .getElementById(
+        "buyingGalleryContent"
+    )
+    .addEventListener(
+        "touchend",
+        function(event){
+
+            const endX =
+                event
+                .changedTouches[0]
+                .screenX;
+
+
+            const endY =
+                event
+                .changedTouches[0]
+                .screenY;
+
+
+            const differenceX =
+                endX -
+                buyingTouchStartX;
+
+
+            const differenceY =
+                endY -
+                buyingTouchStartY;
+
+
+            if(
+                Math.abs(differenceX) > 50 &&
+                Math.abs(differenceX) >
+                Math.abs(differenceY)
+            ){
+
+                if(
+                    differenceX < 0
+                ){
+
+                    changeBuyingSlide(1);
+
+                }else{
+
+                    changeBuyingSlide(-1);
+
+                }
+
+            }
+
+        },
+        {
+            passive:true
+        }
+    );
+
+
+</script>
+
+</body>
+</html>
